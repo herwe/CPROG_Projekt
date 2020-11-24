@@ -5,6 +5,8 @@
 
 
 class Sprite {
+public:
+    void test();
 
 };
 

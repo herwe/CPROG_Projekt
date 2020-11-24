@@ -1,5 +1,6 @@
 #include <iostream>
 #include "SDL2/SDL.h"
+#include "Sprite.h"
 
 int main() {
     SDL_Init(SDL_INIT_VIDEO);
@@ -12,6 +13,10 @@ int main() {
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
     SDL_Delay(3000);
+
+    Sprite* s = new Sprite;
+    s->test();
+    delete s;
 }
 
 
