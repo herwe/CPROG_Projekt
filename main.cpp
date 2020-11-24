@@ -1,6 +1,6 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-
+#include <SDL_image.h>
 #include "Sprite.h"
 
 int main() {
