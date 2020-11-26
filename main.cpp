@@ -1,22 +1,32 @@
 #include <iostream>
 #include <SDL2/SDL.h>
-#include <SDL_image.h>
 #include "Sprite.h"
 
+const int screenWidth = 640;
+const int screenHeight = 480;
+
 int main() {
-    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Window* window = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED,
+                                          SDL_WINDOWPOS_UNDEFINED, screenWidth, screenHeight, SDL_WINDOW_SHOWN);
+    SDL_Surface* image = SDL_LoadBMP("/home/herman/Documents/hanoi.bmp");
+    SDL_Renderer* render = SDL_CreateRenderer(window, -1, 0);
+    SDL_Texture* texture1 = SDL_CreateTextureFromSurface(render, image);
 
-    SDL_Window *window = SDL_CreateWindow("Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_BORDERLESS);
+    SDL_RenderCopy(render, texture1, NULL, NULL);
+    SDL_RenderPresent(render);
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
-   // SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
-    SDL_Delay(3000);
+    SDL_UpdateWindowSurface(window);
 
-    Sprite* s = new Sprite;
-    s->test();
-    delete s;
+    SDL_Delay(5000);
+
+    SDL_DestroyTexture(texture1);
+    SDL_DestroyRenderer(render);
+    SDL_FreeSurface(image);
+    SDL_DestroyWindow(window);
+
+    SDL_Quit();
+
+
 }
 
 
