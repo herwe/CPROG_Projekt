@@ -1,12 +1,21 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "Sprite.h"
+#include "GameEngine.h"
 
 
 
 
 int main(int argc, char *argv[]) {
-    SDL_Window* window = SDL_CreateWindow("Space Invaders", SDL_WINDOWPOS_UNDEFINED,
+
+    GameEngine gameEngine;
+    gameEngine.run();
+
+    return 0;
+
+
+
+    /* SDL_Window* window = SDL_CreateWindow("Space Invaders", SDL_WINDOWPOS_UNDEFINED,
                                           SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_SHOWN);
     SDL_Surface* image = SDL_LoadBMP("/pics/space.bmp");
     SDL_Renderer* render = SDL_CreateRenderer(window, -1, 0);
@@ -29,6 +38,7 @@ int main(int argc, char *argv[]) {
     SDL_DestroyWindow(window);
 
     SDL_Quit();
+    */
 
 
 }
