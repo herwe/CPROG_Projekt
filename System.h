@@ -8,6 +8,7 @@ class System {
 private:
     SDL_Window* window;
     SDL_Renderer* renderer;
+    SDL_Texture* texture;
 
 public:
     System();
