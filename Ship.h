@@ -1,18 +1,22 @@
 
 #include <SDL2/SDL.h>
 #include "Sprite.h"
+
 #ifndef CPROG_PROJEKT_SHIP_H
 #define CPROG_PROJEKT_SHIP_H
 
 
- class Ship : public Sprite {
+class Ship : public Sprite {
 private:
-    SDL_Texture* shipBMP;
+    SDL_Texture *shipBMP;
 protected:
     Ship(int x, int y, int w, int h);
+
 public:
-    static Ship* getInstance(int x, int y, int w, int h);
-    void draw() const;
+    static Ship *getInstance(int x, int y, int w, int h);
+    void key_right(const SDL_Event &);
+    void key_left(const SDL_Event &);
+    void draw();
     ~Ship();
 };
 

@@ -11,10 +11,10 @@ private:
     Sprite(const Sprite&) = delete;
     const Sprite& operator=(const Sprite&) = delete;
 public:
-    const SDL_Rect& get_rekt() const;
+    SDL_Rect& get_rekt();
     virtual void key_right(const SDL_Event&);
     virtual void key_left(const SDL_Event&);
-    virtual void draw() const = 0;
+    virtual void draw() = 0;
 protected:
     Sprite(int x, int y, int w, int h);
 };

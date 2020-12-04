@@ -8,9 +8,18 @@ Ship::Ship(int x, int y, int w, int h) : Sprite(x,y,w,h) {
     SDL_FreeSurface(image);
 }
 
-void Ship::draw() const {
+void Ship::draw()  {
     SDL_RenderCopy(sys.get_renderer(), shipBMP, NULL, &get_rekt());
 }
+
+void Ship::key_left(const SDL_Event &) {
+    this->get_rekt().x -= 5;
+}
+
+void Ship::key_right(const SDL_Event &) {
+    this->get_rekt().x += 5;
+}
+
 
 Ship* Ship::getInstance(int x, int y, int w, int h) {
     return new Ship(x, y, w, h);
