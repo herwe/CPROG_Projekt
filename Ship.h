@@ -5,7 +5,7 @@
 #define CPROG_PROJEKT_SHIP_H
 
 
-class Ship : Sprite {
+ class Ship : public Sprite {
 private:
     SDL_Texture* shipBMP;
 protected:
