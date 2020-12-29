@@ -28,3 +28,8 @@ Ship* Ship::getInstance(int x, int y, int w, int h) {
 Ship::~Ship() {
     SDL_DestroyTexture(shipBMP);
 }
+
+Bullet* Ship::shoot() {
+    Bullet* b = Bullet::getInstance(this->get_rekt().x, this->get_rekt().y, 50,50);
+    return b;
+}

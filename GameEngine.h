@@ -8,10 +8,13 @@
 class GameEngine {
 private:
     std::vector<Sprite*> spriteList;
+    std::vector<Sprite*> removedList;
+    bool bullet_on_screen;
 public:
     ~GameEngine();
     void add(Sprite* sprite);
     void run();
+    void remove(Sprite* sprite);
 };
 
 

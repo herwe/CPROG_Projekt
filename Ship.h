@@ -1,6 +1,7 @@
 
 #include <SDL2/SDL.h>
 #include "Sprite.h"
+#include "Bullet.h"
 
 #ifndef CPROG_PROJEKT_SHIP_H
 #define CPROG_PROJEKT_SHIP_H
@@ -17,6 +18,7 @@ public:
     void key_right(const SDL_Event &);
     void key_left(const SDL_Event &);
     void draw();
+    Bullet* shoot();
     ~Ship();
 };
 

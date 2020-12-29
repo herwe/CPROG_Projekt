@@ -1,10 +1,18 @@
 
-
+#include <iostream>
+#include "Bullet.h"
 #include "GameEngine.h"
+#include "Ship.h"
 
 void GameEngine::add(Sprite *sprite) {
     spriteList.push_back(sprite);
 }
+
+void GameEngine::remove(Sprite* sprite) {
+    removedList.push_back(sprite);
+}
+
+
 
 void GameEngine::run() {
     bool quit = false;
@@ -25,6 +33,15 @@ void GameEngine::run() {
                             for (Sprite *c : spriteList)
                                 c->key_right(eve);
                             break;
+                        case SDLK_SPACE:
+                            for (Sprite *c : spriteList) {
+                                if (Ship* ship = dynamic_cast<Ship*>(c)) {
+                                    if (!bullet_on_screen) {
+                                        spriteList.push_back(ship->shoot());
+                                        bullet_on_screen = true;
+                                    }
+                                }
+                            }
                     }
                     break;
                 case SDL_KEYUP:
@@ -40,12 +57,30 @@ void GameEngine::run() {
         SDL_RenderCopy(sys.get_renderer(), texture, NULL, NULL);
 
         for (Sprite *sprite : spriteList) {
+            if (Bullet* b = dynamic_cast<Bullet*>(sprite)) {
+                if (b->tick()) {
+                    bullet_on_screen = false;
+                    removedList.push_back(b);
+                }
+            }
             sprite->draw();
         }
+
+        for (Sprite* spriteL : removedList) {
+            for (std::vector<Sprite*>::iterator i = spriteList.begin(); i!= spriteList.end();) {
+                if (*i == spriteL) {
+                    i = spriteList.erase(i);
+                } else {
+                    i++;
+                }
+            }
+        }
+        removedList.clear();
 
         SDL_RenderPresent(sys.get_renderer());
         SDL_FreeSurface(image);
         SDL_DestroyTexture(texture);
+
 
     } //yttre while
 
