@@ -17,6 +17,7 @@ void GameEngine::remove(Sprite* sprite) {
 
 void GameEngine::run() {
     bool quit = false;
+    srand((int)time(0));
     int rmdX = rand() % 500 + 50;
     metList.push_back(Meteorite::getInstance(rmdX, 0, 50, 50));
     while (!quit) {

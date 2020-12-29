@@ -20,7 +20,6 @@ public:
     void key_left(const SDL_Event &);
     void draw();
     Bullet* shoot();
-    Meteorite* spawnMeteorite();
     ~Ship();
 };
 

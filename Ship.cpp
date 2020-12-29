@@ -34,8 +34,3 @@ Bullet* Ship::shoot() {
     return b;
 }
 
-Meteorite *Ship::spawnMeteorite() {
-    int rmdX = rand() % 500 + 50;
-    Meteorite* m = Meteorite::getInstance(rmdX, 0, 50,50);
-    return m;
-}

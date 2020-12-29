@@ -14,7 +14,7 @@ void Bullet::draw() {
 }
 
 bool Bullet::tick() {
-    this->get_rekt().y -= 5;
+    this->get_rekt().y -= 10;
 
     if (this->get_rekt().y <= 0) {
         return true;
