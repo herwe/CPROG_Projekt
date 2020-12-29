@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include "Sprite.h"
 #include "Bullet.h"
+#include "Meteorite.h"
 
 #ifndef CPROG_PROJEKT_SHIP_H
 #define CPROG_PROJEKT_SHIP_H
@@ -19,6 +20,7 @@ public:
     void key_left(const SDL_Event &);
     void draw();
     Bullet* shoot();
+    Meteorite* spawnMeteorite();
     ~Ship();
 };
 

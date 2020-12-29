@@ -4,6 +4,7 @@
 #include "GameEngine.h"
 #include "Ship.h"
 
+
 void GameEngine::add(Sprite *sprite) {
     spriteList.push_back(sprite);
 }
@@ -16,7 +17,10 @@ void GameEngine::remove(Sprite* sprite) {
 
 void GameEngine::run() {
     bool quit = false;
+    int rmdX = rand() % 500 + 50;
+    metList.push_back(Meteorite::getInstance(rmdX, 0, 50, 50));
     while (!quit) {
+        nextTick = SDL_GetTicks() + tickInterval;
         SDL_Event eve;
         while (SDL_PollEvent(&eve)) {
             switch (eve.type) {
@@ -49,8 +53,13 @@ void GameEngine::run() {
 
             } // switch
         } // inre while
-        SDL_SetRenderDrawColor(sys.get_renderer(), 255, 255, 255, 255);
 
+        delay = nextTick - SDL_GetTicks();
+        if (delay > 0) {
+            SDL_Delay(delay);
+        }
+
+        SDL_SetRenderDrawColor(sys.get_renderer(), 255, 255, 255, 255);
         SDL_RenderClear(sys.get_renderer());
         SDL_Surface *image = SDL_LoadBMP("/home/herman/Dropbox/Termin 3/CPROG/Projekt/CPROG_Projekt/pics/space.bmp");
         SDL_Texture *texture = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
@@ -64,6 +73,13 @@ void GameEngine::run() {
                 }
             }
             sprite->draw();
+        }
+
+        for (Meteorite* meteorite : metList) {
+            if (meteorite->tick()) {
+                removedList.push_back(meteorite);
+            }
+            meteorite->draw();
         }
 
         for (Sprite* spriteL : removedList) {
