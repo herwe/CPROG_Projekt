@@ -17,7 +17,7 @@ Meteorite *Meteorite::getInstance(int x, int y, int w, int h) {
 
 bool Meteorite::tick() {
     this->get_rekt().y += 3;
-    if (this->get_rekt().y <= 600) {
+    if (this->get_rekt().y >= 600) {
         return true;
     }
 

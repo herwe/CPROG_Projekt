@@ -18,8 +18,11 @@ void GameEngine::remove(Sprite* sprite) {
 void GameEngine::run() {
     bool quit = false;
     srand((int)time(0));
-    int rmdX = rand() % 500 + 50;
-    metList.push_back(Meteorite::getInstance(rmdX, 0, 50, 50));
+    /*int rmdX = rand() % 700 + 50;
+    Meteorite* met = Meteorite::getInstance(rmdX, 0, 50, 50);
+    metList.push_back(met);
+    spriteList.push_back(met);
+     */
     while (!quit) {
         nextTick = SDL_GetTicks() + tickInterval;
         SDL_Event eve;
@@ -66,21 +69,50 @@ void GameEngine::run() {
         SDL_Texture *texture = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
         SDL_RenderCopy(sys.get_renderer(), texture, NULL, NULL);
 
+    for (Sprite *sprite : spriteList) {
+        if (Bullet *b = dynamic_cast<Bullet *>(sprite)) {
+            if (b->tick()) {
+                bullet_on_screen = false;
+                removedList.push_back(b);
+            }
+        }
+        sprite->draw();
+    }
+
+
         for (Sprite *sprite : spriteList) {
-            if (Bullet* b = dynamic_cast<Bullet*>(sprite)) {
-                if (b->tick()) {
-                    bullet_on_screen = false;
-                    removedList.push_back(b);
+            for (Sprite *other : spriteList) {
+                if (sprite->collision(other)) {
+                    std::cout << "krock" << std::endl;
                 }
             }
-            sprite->draw();
         }
+
+            int y_cord = 0;
+            if (!metList.empty()) {
+                y_cord = metList[0]->get_rekt().y;
+            }
+            bool b = false;
+
+            if (metList.empty() || (metList.size() < 2 && y_cord > 300)) {
+                int temp_rmdX = rand() % 700 + 50;
+                Meteorite *temp = Meteorite::getInstance(temp_rmdX, 0, 50, 50);
+                metList.push_back(temp);
+                spriteList.push_back(temp);
+            }
+
 
         for (Meteorite* meteorite : metList) {
             if (meteorite->tick()) {
                 removedList.push_back(meteorite);
+                b = true;
             }
             meteorite->draw();
+        }
+
+        if (b) {
+            metList.erase(metList.begin());
+            b = false;
         }
 
         for (Sprite* spriteL : removedList) {

@@ -30,7 +30,9 @@ Ship::~Ship() {
 }
 
 Bullet* Ship::shoot() {
-    Bullet* b = Bullet::getInstance(this->get_rekt().x, this->get_rekt().y, 50,50);
+    // x = 38
+    // y = -30
+    Bullet* b = Bullet::getInstance(this->get_rekt().x + 38, this->get_rekt().y - 30, 25,50);
     return b;
 }
 

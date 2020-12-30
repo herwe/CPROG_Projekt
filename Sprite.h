@@ -16,6 +16,7 @@ public:
     virtual void key_right(const SDL_Event&);
     virtual void key_left(const SDL_Event&);
     virtual void draw() = 0;
+    bool collision(const Sprite*);
 protected:
     Sprite(int x, int y, int w, int h);
 };
