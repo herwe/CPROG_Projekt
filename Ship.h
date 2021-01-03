@@ -11,7 +11,6 @@
 
 class Ship : public Sprite {
 private:
-    SDL_Texture *shipBMP;
 protected:
     Ship(int x, int y, int w, int h, const char *path);
 

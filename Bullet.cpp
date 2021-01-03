@@ -23,8 +23,6 @@ Bullet *Bullet::getInstance(int x, int y, int w, int h) {
     return new Bullet(x, y, w, h);
 }
 
-Bullet::~Bullet() {
-    SDL_DestroyTexture(bulletBMP);
-}
+
 
 

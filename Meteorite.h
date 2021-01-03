@@ -12,7 +12,6 @@ public:
     ~Meteorite();
 
 private:
-    SDL_Texture *meteoriteBMP;
 
 protected:
     Meteorite(int x, int y, int w, int h, const char *path);

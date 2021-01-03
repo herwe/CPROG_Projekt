@@ -6,13 +6,6 @@ Ship::Ship(int x, int y, int w , int h, const char *path = PATH) : Sprite(x, y, 
 
 }
 
-/*
- * Ship::Ship(int x = 350, int y = 550, int w = 100, int h = 50, const char *path = PATH) : Sprite(x, y, w, h, path) {
-
-}
- */
-
-
 void Ship::key_left() {
     if (this->get_rekt().x > 0){
         this->get_rekt().x -= 5;
@@ -30,9 +23,6 @@ Ship* Ship::getInstance(int x, int y, int w, int h) {
     return new Ship(x, y, w, h);
 }
 
-Ship::~Ship() {
-    SDL_DestroyTexture(shipBMP);
-}
 
 Bullet* Ship::shoot() {
     Bullet* b = Bullet::getInstance(this->get_rekt().x + 38, this->get_rekt().y - 30, 25,50);

@@ -12,7 +12,6 @@ public:
     ~Bullet();
 
 private:
-    SDL_Texture *bulletBMP;
 
 protected:
     Bullet(int x, int y, int w, int h, const char *path);
