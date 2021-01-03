@@ -6,7 +6,7 @@
 
 class Bullet : public Sprite {
 public:
-    void draw();
+
     bool tick();
     static Bullet *getInstance(int x, int y, int w, int h);
     ~Bullet();
@@ -15,7 +15,7 @@ private:
     SDL_Texture *bulletBMP;
 
 protected:
-    Bullet(int x, int y, int w, int h);
+    Bullet(int x, int y, int w, int h, const char *path);
 };
 
 

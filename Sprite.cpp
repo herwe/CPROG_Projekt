@@ -7,21 +7,19 @@ SDL_Rect &Sprite::get_rekt() {
     return rekt;
 }
 
-Sprite::Sprite(int x, int y, int w, int h) : rekt{x, y, w, h} {
-
+Sprite::Sprite(int x, int y, int w, int h, const char *path) : rekt{x, y, w, h} {
+    SDL_Surface *image = SDL_LoadBMP(path);
+    sdlTexture = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
+    SDL_FreeSurface(image);
 }
 
-void Sprite::key_right(const SDL_Event &) {
-
+void Sprite::draw()  {
+    SDL_RenderCopy(sys.get_renderer(), sdlTexture, NULL, &get_rekt());
 }
 
-
-void Sprite::key_left(const SDL_Event &) {
-
-}
 
 Sprite::~Sprite() {
-    std::cout << "borta" << std::endl;
+    delete sdlTexture;
 }
 
 bool Sprite::collision(const Sprite* otherSprite) {

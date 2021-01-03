@@ -1,5 +1,6 @@
 
 #include <SDL2/SDL.h>
+#include <string>
 #include "Sprite.h"
 #include "Bullet.h"
 #include "Meteorite.h"
@@ -12,13 +13,12 @@ class Ship : public Sprite {
 private:
     SDL_Texture *shipBMP;
 protected:
-    Ship(int x, int y, int w, int h);
+    Ship(int x, int y, int w, int h, const char *path);
 
 public:
     static Ship *getInstance(int x, int y, int w, int h);
-    void key_right(const SDL_Event &);
-    void key_left(const SDL_Event &);
-    void draw();
+    void key_right();
+    void key_left();
     Bullet* shoot();
     ~Ship();
 };

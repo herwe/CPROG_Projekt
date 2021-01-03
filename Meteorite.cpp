@@ -1,18 +1,15 @@
+#define PATH "E:/fredr/Documents/CLionProjects/CPROG Projekt/CPROG_Projekt/pics/met.bmp"
+
 #include "Meteorite.h"
 
-Meteorite::Meteorite(int x, int y, int w, int h) : Sprite(x, y, w, h) {
-    SDL_Surface *image = SDL_LoadBMP("/home/herman/Dropbox/Termin 3/CPROG/Projekt/CPROG_Projekt/pics/met.bmp");
-    meteoriteBMP = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
-    SDL_FreeSurface(image);
-}
+Meteorite::Meteorite(int x, int y, int w, int h, const char* path = PATH) : Sprite(x, y, w, h, path) {
 
-void Meteorite::draw() {
-    SDL_RenderCopy(sys.get_renderer(), meteoriteBMP, NULL, &get_rekt());
 }
 
 
-Meteorite *Meteorite::getInstance(int x, int y, int w, int h) {
-    return new Meteorite(x, y, w, h);
+Meteorite *Meteorite::getInstance() {
+    int x = rand() % 700 + 50;
+    return new Meteorite(x, 0, 50, 50);
 }
 
 bool Meteorite::tick() {

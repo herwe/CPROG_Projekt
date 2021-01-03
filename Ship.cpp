@@ -1,23 +1,28 @@
-
+#define PATH "E:/fredr/Documents/CLionProjects/CPROG Projekt/CPROG_Projekt/pics/ship.bmp"
 
 #include "Ship.h"
 
-Ship::Ship(int x, int y, int w, int h) : Sprite(x,y,w,h) {
-    SDL_Surface *image = SDL_LoadBMP("/home/herman/Dropbox/Termin 3/CPROG/Projekt/CPROG_Projekt/pics/ship.bmp");
-    shipBMP = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
-    SDL_FreeSurface(image);
+Ship::Ship(int x, int y, int w , int h, const char *path = PATH) : Sprite(x, y, w, h, path) {
+
 }
 
-void Ship::draw()  {
-    SDL_RenderCopy(sys.get_renderer(), shipBMP, NULL, &get_rekt());
+/*
+ * Ship::Ship(int x = 350, int y = 550, int w = 100, int h = 50, const char *path = PATH) : Sprite(x, y, w, h, path) {
+
+}
+ */
+
+
+void Ship::key_left() {
+    if (this->get_rekt().x > 0){
+        this->get_rekt().x -= 5;
+    }
 }
 
-void Ship::key_left(const SDL_Event &) {
-    this->get_rekt().x -= 5;
-}
-
-void Ship::key_right(const SDL_Event &) {
-    this->get_rekt().x += 5;
+void Ship::key_right() {
+    if (this->get_rekt().x < 700){
+        this->get_rekt().x += 5;
+    }
 }
 
 
@@ -30,8 +35,6 @@ Ship::~Ship() {
 }
 
 Bullet* Ship::shoot() {
-    // x = 38
-    // y = -30
     Bullet* b = Bullet::getInstance(this->get_rekt().x + 38, this->get_rekt().y - 30, 25,50);
     return b;
 }

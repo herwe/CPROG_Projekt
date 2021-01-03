@@ -5,16 +5,17 @@
 
 class Meteorite : public Sprite {
 public:
-    void draw();
+
+
     bool tick();
-    static Meteorite *getInstance(int x, int y, int w, int h);
+    static Meteorite *getInstance();
     ~Meteorite();
 
 private:
     SDL_Texture *meteoriteBMP;
 
 protected:
-    Meteorite(int x, int y, int w, int h);
+    Meteorite(int x, int y, int w, int h, const char *path);
 };
 
 

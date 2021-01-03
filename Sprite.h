@@ -8,17 +8,16 @@
 class Sprite {
 private:
     SDL_Rect rekt;
+    SDL_Texture *sdlTexture;
     Sprite(const Sprite&) = delete;
     const Sprite& operator=(const Sprite&) = delete;
 public:
     ~Sprite();
     SDL_Rect& get_rekt();
-    virtual void key_right(const SDL_Event&);
-    virtual void key_left(const SDL_Event&);
-    virtual void draw() = 0;
+    virtual void draw();
     bool collision(const Sprite*);
 protected:
-    Sprite(int x, int y, int w, int h);
+    Sprite(int x, int y, int w, int h, const char *path);
 };
 
 

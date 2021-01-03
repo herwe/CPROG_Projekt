@@ -1,5 +1,6 @@
 
 #include <vector>
+#include "Ship.h"
 #include "Sprite.h"
 #include "Meteorite.h"
 #ifndef CPROG_PROJEKT_GAMEENGINE_H
@@ -9,10 +10,11 @@
 
 class GameEngine {
 private:
+    Ship* ship;
     std::vector<Sprite*> spriteList;
-    std::vector<Sprite*> removedList;
-    std::vector<Meteorite*> metList;
-    bool bullet_on_screen;
+    std::vector<Sprite*> toRemoveList;
+    std::vector<Meteorite*> meteoriteList;
+    bool bulletOnScreen = false;
     const int tickInterval = 1000 / FPS;
     Uint32 nextTick;
     int delay;
@@ -20,7 +22,16 @@ public:
     ~GameEngine();
     void add(Sprite* sprite);
     void run();
-    void remove(Sprite* sprite);
+
+    void bulletCheck(Sprite *sprite);
+
+    void collisionCheck(Sprite *sprite);
+
+    void meteoriteSpawning();
+
+    void meteoriteDeletion();
+
+    void remove();
 };
 
 
