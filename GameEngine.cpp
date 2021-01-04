@@ -5,11 +5,6 @@
 #include "GameEngine.h"
 #include "Ship.h"
 
-
-void GameEngine::add(Sprite *sprite) {
-    spriteList.push_back(sprite);
-}
-
 void GameEngine::run() {
 
     ship = Ship::getInstance(350, 550, 100, 50);

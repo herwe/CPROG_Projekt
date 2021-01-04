@@ -20,7 +20,6 @@ private:
     int delay;
 public:
     ~GameEngine();
-    void add(Sprite* sprite);
     void run();
 
     void bulletCheck(Sprite *sprite);
