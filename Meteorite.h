@@ -1,5 +1,4 @@
 #include "Sprite.h"
-#include <time.h>
 #ifndef CPROG_PROJEKT_METEORITE_H
 #define CPROG_PROJEKT_METEORITE_H
 
