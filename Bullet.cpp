@@ -1,4 +1,4 @@
-#define PATH "E:/fredr/Documents/CLionProjects/CPROG Projekt/CPROG_Projekt/pics/bullet.bmp"
+#define PATH "/home/herman/Dropbox/Termin 3/CPROG/Projekt/CPROG_Projekt/pics/bullet.bmp"
 #include <vector>
 #include <iostream>
 #include "Bullet.h"

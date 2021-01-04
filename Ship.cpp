@@ -1,4 +1,4 @@
-#define PATH "E:/fredr/Documents/CLionProjects/CPROG Projekt/CPROG_Projekt/pics/ship.bmp"
+#define PATH "/home/herman/Dropbox/Termin 3/CPROG/Projekt/CPROG_Projekt/pics/ship.bmp"
 
 #include "Ship.h"
 

@@ -1,4 +1,4 @@
-#define PATH "E:/fredr/Documents/CLionProjects/CPROG Projekt/CPROG_Projekt/pics/space.bmp"
+#define PATH "/home/herman/Dropbox/Termin 3/CPROG/Projekt/CPROG_Projekt/pics/space.bmp"
 
 #include <iostream>
 #include "Bullet.h"
@@ -10,7 +10,7 @@ void GameEngine::run() {
     ship = Ship::getInstance(350, 550, 100, 50);
     spriteList.push_back(ship);
     bool quit = false;
-
+    srand (time(nullptr));
     while (!quit) {
         nextTick = SDL_GetTicks() + tickInterval;
         SDL_Event eve;
@@ -125,14 +125,20 @@ void GameEngine::meteoriteSpawning() {
 void GameEngine::collisionCheck(Sprite *sprite) {
     for (Sprite *other : spriteList) {
         if (sprite->collision(other)) {
-            std::cout << "krock" << std::endl;
+            toRemoveList.push_back(sprite);
+            toRemoveList.push_back(other);
+            if (dynamic_cast<Ship*>(sprite) || dynamic_cast<Ship*>(other)) { // Game over!
+                bulletOnScreen = true;
+            } else {
+                bulletOnScreen = false;
+            }
         }
     }
 }
 
 /*
  * Checks if the bullet is outside the screen
- * and if so setts bulletOnScreen to false so that the player can shoot another shot
+ * and if so sets bulletOnScreen to false so that the player can shoot another shot
  * and adds the bullet to toRemoveList
  */
 void GameEngine::bulletCheck(Sprite *sprite) {

@@ -1,12 +1,11 @@
 #include "Sprite.h"
+#include <time.h>
 #ifndef CPROG_PROJEKT_METEORITE_H
 #define CPROG_PROJEKT_METEORITE_H
 
 
 class Meteorite : public Sprite {
 public:
-
-
     bool tick();
     static Meteorite *getInstance();
     ~Meteorite();
