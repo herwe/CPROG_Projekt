@@ -4,7 +4,7 @@
 
 System::System() {
     SDL_Init(SDL_INIT_EVERYTHING);
-    window = SDL_CreateWindow("   Space Invaders", SDL_WINDOWPOS_CENTERED,
+    window = SDL_CreateWindow("   Space Shooter", SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED, 800, 600, 0);
     renderer = SDL_CreateRenderer(window, -1, 0);
 
