@@ -10,7 +10,6 @@ void GameEngine::run() {
     ship = Ship::getInstance(350, 550, 100, 50);
     spriteList.push_back(ship);
     bool quit = false;
-    srand (time(nullptr));
     while (!quit) {
         nextTick = SDL_GetTicks() + tickInterval;
         SDL_Event eve;
