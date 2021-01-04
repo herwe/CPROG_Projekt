@@ -1,4 +1,3 @@
-
 #include <SDL2/SDL.h>
 #ifndef CPROG_PROJEKT_SYSTEM_H
 #define CPROG_PROJEKT_SYSTEM_H

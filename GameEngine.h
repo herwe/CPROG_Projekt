@@ -1,11 +1,11 @@
+#ifndef CPROG_PROJEKT_GAMEENGINE_H
+#define CPROG_PROJEKT_GAMEENGINE_H
+#define FPS 60
 
 #include <vector>
 #include "Ship.h"
 #include "Sprite.h"
 #include "Meteorite.h"
-#ifndef CPROG_PROJEKT_GAMEENGINE_H
-#define CPROG_PROJEKT_GAMEENGINE_H
-#define FPS 60
 
 
 class GameEngine {

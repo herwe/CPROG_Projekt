@@ -1,5 +1,3 @@
-#include <iostream>
-#include <SDL2/SDL.h>
 #include "Sprite.h"
 #include "GameEngine.h"
 #include "Ship.h"
@@ -13,5 +11,3 @@ int main(int argc, char *argv[]) {
     gameEngine.run();
     return 0;
 }
-
-
