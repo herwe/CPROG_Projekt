@@ -51,8 +51,15 @@ void GameEngine::run() {
         SDL_Surface *image = SDL_LoadBMP(PATH);
         SDL_Texture *texture = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
         SDL_RenderCopy(sys.get_renderer(), texture, NULL, NULL);
-
+        bool b = false; // boolean value to check if a ship exists. Needed because both branches are true until the ship is destroyed.
         for (Sprite *sprite : spriteList) {
+            if (dynamic_cast<Ship*>(sprite)) { // spriteList contains Ship*.
+                b = true;
+            } else {
+                if (!b) { // If this boolean is false, that means there is no Ship in the spriteList vector.
+                    bulletOnScreen = true;
+                }
+            }
             bulletCheck(sprite);    //Handles bullets, see method comment comment
             collisionCheck(sprite); //Handles sprite collision
             sprite->draw();         //Draws all sprites
@@ -121,6 +128,7 @@ void GameEngine::meteoriteSpawning() {
 /*
  * Checks collisions
  */
+
 void GameEngine::collisionCheck(Sprite *sprite) {
     for (Sprite *other : spriteList) {
         if (sprite->collision(other)) {

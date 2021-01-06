@@ -3,6 +3,7 @@
 #define FPS 60
 
 #include <vector>
+#include <algorithm>
 #include "Ship.h"
 #include "Sprite.h"
 #include "Meteorite.h"

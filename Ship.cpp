@@ -2,9 +2,7 @@
 
 #include "Ship.h"
 
-Ship::Ship(int x, int y, int w , int h, const char *path = PATH) : Sprite(x, y, w, h, path) {
-
-}
+Ship::Ship(int x, int y, int w , int h, const char *path = PATH) : Sprite(x, y, w, h, path) {}
 
 void Ship::key_left() {
     if (this->get_rekt().x > 0){
@@ -28,4 +26,7 @@ Bullet* Ship::shoot() {
     Bullet* b = Bullet::getInstance(this->get_rekt().x + 38, this->get_rekt().y - 30, 25,50);
     return b;
 }
+
+
+
 
