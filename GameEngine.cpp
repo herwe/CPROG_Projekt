@@ -56,7 +56,7 @@ void GameEngine::run() {
             if (dynamic_cast<Ship*>(sprite)) { // spriteList contains Ship*.
                 b = true;
             } else {
-                if (!b) { // If this boolean is false, that means there is no Ship in the spriteList vector.
+                if (!b) { // If this boolean is false, that means there is no Ship* in the spriteList vector.
                     bulletOnScreen = true;
                 }
             }
