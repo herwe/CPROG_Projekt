@@ -10,8 +10,6 @@
 
 
 class Ship : public Sprite {
-private:
-
 protected:
     Ship(int x, int y, int w, int h, const char *path);
 

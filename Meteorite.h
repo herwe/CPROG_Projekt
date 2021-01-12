@@ -4,15 +4,13 @@
 
 
 class Meteorite : public Sprite {
+protected:
+    Meteorite(int x, int y, int w, int h, const char *path);
+
 public:
     bool tick();
     static Meteorite *getInstance();
     ~Meteorite();
-
-private:
-
-protected:
-    Meteorite(int x, int y, int w, int h, const char *path);
 };
 
 

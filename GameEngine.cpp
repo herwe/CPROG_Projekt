@@ -26,8 +26,8 @@ void GameEngine::run() {
                         case SDLK_RIGHT:
                             ship->key_right();
                             break;
-                        case SDLK_SPACE:    //If the player presses space and there is no bullet on screen, shoot and disable the ability to shoot
-                            if (!bulletOnScreen) {
+                        case SDLK_SPACE:    //If the player presses space and there is no bullet on screen AND there exists a ship, shoot and disable the ability to shoot
+                            if (!bulletOnScreen && existShip) {
                                 spriteList.push_back(ship->shoot());
                                 bulletOnScreen = true;
                             }
@@ -39,7 +39,7 @@ void GameEngine::run() {
             }
         }
 
-        //Run the game at a constant speed
+        //Runs the game at a constant speed
         delay = nextTick - SDL_GetTicks();
         if (delay > 0) {
             SDL_Delay(delay);
@@ -51,15 +51,7 @@ void GameEngine::run() {
         SDL_Surface *image = SDL_LoadBMP(PATH);
         SDL_Texture *texture = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
         SDL_RenderCopy(sys.get_renderer(), texture, NULL, NULL);
-        bool b = false; // boolean value to check if a ship exists. Needed because both branches are true until the ship is destroyed.
         for (Sprite *sprite : spriteList) {
-            if (dynamic_cast<Ship*>(sprite)) { // spriteList contains Ship*.
-                b = true;
-            } else {
-                if (!b) { // If this boolean is false, that means there is no Ship* in the spriteList vector.
-                    bulletOnScreen = true;
-                }
-            }
             bulletCheck(sprite);    //Handles bullets, see method comment comment
             collisionCheck(sprite); //Handles sprite collision
             sprite->draw();         //Draws all sprites
@@ -135,7 +127,7 @@ void GameEngine::collisionCheck(Sprite *sprite) {
             toRemoveList.push_back(sprite);
             toRemoveList.push_back(other);
             if (dynamic_cast<Ship*>(sprite) || dynamic_cast<Ship*>(other)) { // Game over!
-                bulletOnScreen = true;
+                existShip = false;
             } else {
                 bulletOnScreen = false;
             }

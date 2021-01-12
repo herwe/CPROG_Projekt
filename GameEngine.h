@@ -19,20 +19,18 @@ private:
     const int tickInterval = 1000 / FPS;
     Uint32 nextTick;
     int delay;
+    bool existShip = true;
+
+    void bulletCheck(Sprite *sprite);
+    void collisionCheck(Sprite *sprite);
+    void meteoriteSpawning();
+    void meteoriteDeletion();
+    void remove();
+
 public:
     ~GameEngine();
     void run();
 
-    void bulletCheck(Sprite *sprite);
-
-    void collisionCheck(Sprite *sprite);
-
-    void meteoriteSpawning();
-
-    void meteoriteDeletion();
-
-    void remove();
 };
-
 
 #endif //CPROG_PROJEKT_GAMEENGINE_H

@@ -2,10 +2,7 @@
 #include <vector>
 #include "Bullet.h"
 
-Bullet::Bullet(int x, int y, int w, int h, const char* path = PATH) : Sprite(x, y, w, h, path) {
-
-}
-
+Bullet::Bullet(int x, int y, int w, int h, const char* path = PATH) : Sprite(x, y, w, h, path) {}
 
 bool Bullet::tick() {
     this->get_rekt().y -= 15;
@@ -13,9 +10,7 @@ bool Bullet::tick() {
     if (this->get_rekt().y <= 0) {
         return true;
     }
-
     return false;
-
 }
 
 Bullet *Bullet::getInstance(int x, int y, int w, int h) {
