@@ -22,15 +22,18 @@ private:
     bool existShip = true;
 
     void bulletCheck(Sprite *sprite);
-    void collisionCheck(Sprite *sprite);
+    Sprite* collisionCheck(Sprite *sprite);
     void meteoriteSpawning();
     void meteoriteDeletion();
     void remove();
+    void addSprite(Sprite*);
 
 public:
     ~GameEngine();
     void run();
 
 };
+
+extern GameEngine engine;
 
 #endif //CPROG_PROJEKT_GAMEENGINE_H

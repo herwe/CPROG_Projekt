@@ -3,7 +3,6 @@
 #include "Ship.h"
 #include "Meteorite.h"
 
-
 int main(int argc, char *argv[]) {
     GameEngine gameEngine;
     gameEngine.run();

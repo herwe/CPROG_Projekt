@@ -5,6 +5,11 @@
 #include "GameEngine.h"
 #include "Ship.h"
 
+void GameEngine::addSprite(Sprite* sprite){
+    spriteList.push_back(sprite);
+//BOOM
+}
+
 void GameEngine::run() {
 
     ship = Ship::getInstance(350, 550, 100, 50);
@@ -14,28 +19,11 @@ void GameEngine::run() {
         nextTick = SDL_GetTicks() + tickInterval;
         SDL_Event eve;
         while (SDL_PollEvent(&eve)) {
-            switch (eve.type) {
-                case SDL_QUIT:
-                    quit = true;
-                    break;
-                case SDL_KEYDOWN:
-                    switch (eve.key.keysym.sym) {
-                        case SDLK_LEFT:
-                            ship->key_left();
-                            break;
-                        case SDLK_RIGHT:
-                            ship->key_right();
-                            break;
-                        case SDLK_SPACE:    //If the player presses space and there is no bullet on screen AND there exists a ship, shoot and disable the ability to shoot
-                            if (!bulletOnScreen && existShip) {
-                                spriteList.push_back(ship->shoot());
-                                bulletOnScreen = true;
-                            }
-                    }
-                    break;
-                case SDL_KEYUP:
-                    break;
-
+            if (eve.type == SDL_QUIT){
+                quit = true;
+            }
+            if (eve.type == SDL_KEYDOWN){
+                ship->key_pressed(eve);
             }
         }
 
@@ -121,7 +109,7 @@ void GameEngine::meteoriteSpawning() {
  * Checks collisions
  */
 
-void GameEngine::collisionCheck(Sprite *sprite) {
+Sprite* GameEngine::collisionCheck(Sprite *sprite) {
     for (Sprite *other : spriteList) {
         if (sprite->collision(other)) {
             toRemoveList.push_back(sprite);
