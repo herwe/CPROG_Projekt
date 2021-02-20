@@ -1,39 +1,41 @@
-#ifndef CPROG_PROJEKT_GAMEENGINE_H
-#define CPROG_PROJEKT_GAMEENGINE_H
-#define FPS 60
+#ifndef CPROG_PROJEKT_SpriteEngine_H
+#define CPROG_PROJEKT_SpriteEngine_H
+
 
 #include <vector>
 #include <algorithm>
 #include "Player.h"
 #include "Sprite.h"
-#include "TargetSprite.h"
-
+#include "Target.h"
+#include "GameParams.h"
 
 class GameEngine {
 private:
+
     Player* player;
     std::vector<Sprite*> spriteList;
     std::vector<Sprite*> toRemoveList;
-    std::vector<TargetSprite*> meteoriteList;
+    std::vector<Target*> targetList;
     bool bulletOnScreen = false;
-    const int tickInterval = 1000 / FPS;
+    const int tickInterval = 1000 / gameParams.fps;
     Uint32 nextTick;
     int delay;
     bool existShip = true;
 
     void bulletCheck(Sprite *sprite);
     Sprite* collisionCheck(Sprite *sprite);
-    void meteoriteSpawning();
-    void meteoriteDeletion();
+    void targetSpawning();
+    void targetDeletion();
     void remove();
     void addSprite(Sprite*);
 
 public:
+    GameParams gameParams;
     ~GameEngine();
-    void run();
+    void run(GameParams);
 
 };
 
 extern GameEngine engine;
 
-#endif //CPROG_PROJEKT_GAMEENGINE_H
+#endif //CPROG_PROJEKT_SpriteEngine_H

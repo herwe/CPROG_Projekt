@@ -5,14 +5,16 @@
 #include "GameEngine.h"
 #include "Player.h"
 
+
 void GameEngine::addSprite(Sprite* sprite){
     spriteList.push_back(sprite);
 //BOOM
 }
 
-void GameEngine::run() {
+void GameEngine::run(GameParams gp) {
+    gameParams = gp;
 
-    player = Player::getInstance(350, 550, 100, 50);
+    player = Player::getInstance(gameParams.playerX, gameParams.playerY, gameParams.playerWidth, gameParams.playerHeight);
     spriteList.push_back(player);
     bool quit = false;
     while (!quit) {
@@ -45,8 +47,8 @@ void GameEngine::run() {
             sprite->draw();         //Draws all sprites
         }
 
-        meteoriteSpawning();        //Handles meteorite spawning, see method comment comment
-        meteoriteDeletion();        //If a meteorite leaves the screen, delete it
+        targetSpawning();        //Handles meteorite spawning, see method comment comment
+        targetDeletion();        //If a meteorite leaves the screen, delete it
 
         remove();                   //Removes all sprites in toRemoveList from spriteList
 
@@ -77,9 +79,9 @@ void GameEngine::remove() {
 /*
  * If a meteorite leaves the screen, delete it
  */
-void GameEngine::meteoriteDeletion() {
+void GameEngine::targetDeletion() {
     bool deleteFirstMeteorite = false;
-    for (TargetSprite *meteorite : meteoriteList) {
+    for (Target *meteorite : targetList) {
         if (meteorite->tick()) {
             toRemoveList.push_back(meteorite);
             deleteFirstMeteorite = true;
@@ -87,7 +89,7 @@ void GameEngine::meteoriteDeletion() {
     }
 
     if (deleteFirstMeteorite) {
-        meteoriteList.erase(meteoriteList.begin());
+        targetList.erase(targetList.begin());
     }
 }
 
@@ -97,10 +99,10 @@ void GameEngine::meteoriteDeletion() {
  * OR
  * if there is only one meteorite on screen and it has reached at least halfway down
  */
-void GameEngine::meteoriteSpawning() {
-    if (meteoriteList.empty() || (meteoriteList.size() < 2 && meteoriteList[0]->get_rekt().y > 300)) {
-        TargetSprite *temp = TargetSprite::getInstance();
-        meteoriteList.push_back(temp);
+void GameEngine::targetSpawning() {
+    if (targetList.empty() || (targetList.size() < 2 && targetList[0]->get_rekt().y > 300)) {
+        Target *temp = Target::getInstance();
+        targetList.push_back(temp);
         spriteList.push_back(temp);
     }
 }

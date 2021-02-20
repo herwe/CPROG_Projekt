@@ -3,14 +3,14 @@
 #define CPROG_PROJEKT_METEORITE_H
 
 
-class TargetSprite : public Sprite {
+class Target : public Sprite {
 protected:
-    TargetSprite(int x, int y, int w, int h, const char *path);
+    Target(int x, int y, int w, int h, const char *path);
 
 public:
     bool tick();
-    static TargetSprite *getInstance();
-    ~TargetSprite();
+    static Target *getInstance();
+    ~Target();
 };
 
 

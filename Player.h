@@ -3,7 +3,7 @@
 #include <string>
 #include "Sprite.h"
 #include "Bullet.h"
-#include "TargetSprite.h"
+#include "Target.h"
 
 #ifndef CPROG_PROJEKT_SHIP_H
 #define CPROG_PROJEKT_SHIP_H
