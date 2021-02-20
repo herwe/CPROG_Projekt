@@ -1,7 +1,7 @@
 #include "Sprite.h"
 #include "GameEngine.h"
-#include "Ship.h"
-#include "Meteorite.h"
+#include "Player.h"
+#include "TargetSprite.h"
 
 int main(int argc, char *argv[]) {
     GameEngine gameEngine;

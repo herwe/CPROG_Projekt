@@ -3,23 +3,23 @@
 #include <string>
 #include "Sprite.h"
 #include "Bullet.h"
-#include "Meteorite.h"
+#include "TargetSprite.h"
 
 #ifndef CPROG_PROJEKT_SHIP_H
 #define CPROG_PROJEKT_SHIP_H
 
 
-class Ship : public Sprite {
+class Player : public Sprite {
 protected:
-    Ship(int x, int y, int w, int h, const char *path);
+    Player(int x, int y, int w, int h, const char *path);
 
 public:
-    static Ship *getInstance(int x, int y, int w, int h);
+    static Player *getInstance(int x, int y, int w, int h);
     void key_right();
     void key_left();
     Bullet* shoot();
     void key_pressed(SDL_Event e);
-    ~Ship();
+    ~Player();
 };
 
 

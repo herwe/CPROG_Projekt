@@ -2,17 +2,18 @@
 
 #include <iostream>
 #include "Bullet.h"
-#include "GameEngine.h"
+#include "SpriteEngine.h"
 #include "Player.h"
 
-void GameEngine::addSprite(Sprite* sprite){
+
+void SpriteEngine::addSprite(Sprite* sprite){
     spriteList.push_back(sprite);
 //BOOM
 }
 
-void GameEngine::run() {
+void SpriteEngine::run(GameParams gameParams) {
 
-    player = Player::getInstance(350, 550, 100, 50);
+    player = Player::getInstance(gameParams.playerX, gameParams.playerY, gameParams.playerWidth, gameParams.playerHeight);
     spriteList.push_back(player);
     bool quit = false;
     while (!quit) {
@@ -45,8 +46,8 @@ void GameEngine::run() {
             sprite->draw();         //Draws all sprites
         }
 
-        meteoriteSpawning();        //Handles meteorite spawning, see method comment comment
-        meteoriteDeletion();        //If a meteorite leaves the screen, delete it
+        targetSpawning();        //Handles meteorite spawning, see method comment comment
+        targetDeletion();        //If a meteorite leaves the screen, delete it
 
         remove();                   //Removes all sprites in toRemoveList from spriteList
 
@@ -61,7 +62,7 @@ void GameEngine::run() {
 /*
  * Removes all sprites marked for removal from spriteList
  */
-void GameEngine::remove() {
+void SpriteEngine::remove() {
     for (Sprite *spriteL : toRemoveList) {
         for (std::vector<Sprite *>::iterator i = spriteList.begin(); i != spriteList.end();) {
             if (*i == spriteL) {
@@ -77,9 +78,9 @@ void GameEngine::remove() {
 /*
  * If a meteorite leaves the screen, delete it
  */
-void GameEngine::meteoriteDeletion() {
+void SpriteEngine::targetDeletion() {
     bool deleteFirstMeteorite = false;
-    for (TargetSprite *meteorite : meteoriteList) {
+    for (TargetSprite *meteorite : targetList) {
         if (meteorite->tick()) {
             toRemoveList.push_back(meteorite);
             deleteFirstMeteorite = true;
@@ -87,7 +88,7 @@ void GameEngine::meteoriteDeletion() {
     }
 
     if (deleteFirstMeteorite) {
-        meteoriteList.erase(meteoriteList.begin());
+        targetList.erase(targetList.begin());
     }
 }
 
@@ -97,10 +98,10 @@ void GameEngine::meteoriteDeletion() {
  * OR
  * if there is only one meteorite on screen and it has reached at least halfway down
  */
-void GameEngine::meteoriteSpawning() {
-    if (meteoriteList.empty() || (meteoriteList.size() < 2 && meteoriteList[0]->get_rekt().y > 300)) {
+void SpriteEngine::targetSpawning() {
+    if (targetList.empty() || (targetList.size() < 2 && targetList[0]->get_rekt().y > 300)) {
         TargetSprite *temp = TargetSprite::getInstance();
-        meteoriteList.push_back(temp);
+        targetList.push_back(temp);
         spriteList.push_back(temp);
     }
 }
@@ -109,7 +110,7 @@ void GameEngine::meteoriteSpawning() {
  * Checks collisions
  */
 
-Sprite* GameEngine::collisionCheck(Sprite *sprite) {
+Sprite* SpriteEngine::collisionCheck(Sprite *sprite) {
     for (Sprite *other : spriteList) {
         if (sprite->collision(other)) {
             toRemoveList.push_back(sprite);
@@ -128,7 +129,7 @@ Sprite* GameEngine::collisionCheck(Sprite *sprite) {
  * and if so sets bulletOnScreen to false so that the player can shoot another shot
  * and adds the bullet to toRemoveList
  */
-void GameEngine::bulletCheck(Sprite *sprite) {
+void SpriteEngine::bulletCheck(Sprite *sprite) {
     if (Bullet *b = dynamic_cast<Bullet *>(sprite)) {
         if (b->tick()) {
             bulletOnScreen = false;
@@ -138,6 +139,6 @@ void GameEngine::bulletCheck(Sprite *sprite) {
 }
 
 
-GameEngine::~GameEngine() {
+SpriteEngine::~SpriteEngine() {
 
 }

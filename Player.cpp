@@ -1,10 +1,10 @@
 #define PATH "E:/fredr/Documents/CLionProjects/CPROG Projekt/CPROG_Projekt/pics/ship.bmp"
 
-#include "Ship.h"
+#include "Player.h"
 
-Ship::Ship(int x, int y, int w , int h, const char *path = PATH) : Sprite(x, y, w, h, path) {}
+Player::Player(int x, int y, int w , int h, const char *path = PATH) : Sprite(x, y, w, h, path) {}
 
-void Ship::key_pressed(SDL_Event eve){
+void Player::key_pressed(SDL_Event eve){
     switch (eve.key.keysym.sym) {
         case SDLK_LEFT:
             if (this->get_rekt().x > 0){
@@ -20,21 +20,21 @@ void Ship::key_pressed(SDL_Event eve){
 
             break;
 
-//        case SDLK_SPACE:    //If the player presses space and there is no bullet on screen AND there exists a ship, shoot and disable the ability to shoot
+//        case SDLK_SPACE:    //If the player presses space and there is no bullet on screen AND there exists a player, shoot and disable the ability to shoot
 //
 //                if (!bulletOnScreen && existShip) {
-//                spriteList.push_back(ship->shoot());
+//                spriteList.push_back(player->shoot());
 //                bulletOnScreen = true;
 //            }
     }
 }
 
-Ship* Ship::getInstance(int x, int y, int w, int h) {
-    return new Ship(x, y, w, h);
+Player* Player::getInstance(int x, int y, int w, int h) {
+    return new Player(x, y, w, h);
 }
 
 
-Bullet* Ship::shoot() {
+Bullet* Player::shoot() {
     Bullet* b = Bullet::getInstance(this->get_rekt().x + 38, this->get_rekt().y - 30, 25,50);
     return b;
 }

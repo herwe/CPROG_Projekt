@@ -19,7 +19,7 @@ void Sprite::draw()  {
 
 
 Sprite::~Sprite() {
-    delete sdlTexture;
+    SDL_DestroyTexture(sdlTexture);
 }
 
 bool Sprite::collision(const Sprite* otherSprite) {
