@@ -12,8 +12,8 @@ void Bullet::tick() {
     }
 }
 
-Bullet *Bullet::getInstance(int x, int y, int w, int h) {
-    return new Bullet(x, y, w, h);
+Bullet *Bullet::getInstance(int x, int y) {
+    return new Bullet(x, y, engine.gameParams.bulletWidth, engine.gameParams.bulletHeight);
 }
 
 

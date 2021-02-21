@@ -23,13 +23,6 @@ void Player::key_pressed(SDL_Event eve) {
                 bulletDelay = engine.gameParams.bulletDelay;
             }
             break;
-
-//        case SDLK_SPACE:    //If the player presses space and there is no bullet on screen AND there exists a player, shoot and disable the ability to shoot
-//
-//                if (!bulletOnScreen && existShip) {
-//                spriteList.push_back(player->shoot());
-//                bulletOnScreen = true;
-//            }
     }
 }
 
@@ -45,7 +38,7 @@ void Player::tick() {
 
 Bullet *Player::shoot() {
     Bullet *b = Bullet::getInstance(this->get_rekt().x + engine.gameParams.bulletOffsetX,
-                                    this->get_rekt().y + engine.gameParams.bulletOffsetY, 25, 50);
+                                    this->get_rekt().y + engine.gameParams.bulletOffsetY);
     return b;
 }
 

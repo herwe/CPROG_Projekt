@@ -46,16 +46,13 @@ void GameEngine::run(GameParams gp) {
         SDL_Texture *texture = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
         SDL_RenderCopy(sys.get_renderer(), texture, NULL, NULL);
         for (Sprite *sprite : spriteList) {
-//            bulletCheck(sprite);    //Handles bullets, see method comment comment
             collisionCheck(sprite); //Handles sprite collision
             sprite->tick();
             sprite->draw();         //Draws all sprites
         }
 
-        targetSpawning();        //Handles meteorite spawning, see method comment comment
-//        targetDeletion();        //If a meteorite leaves the screen, delete it
-
-        executeRemove();                   //Removes all sprites in toRemoveList from spriteList
+        targetSpawning();           //Handles target spawning, see method comment comment
+        executeRemove();            //Removes all sprites in toRemoveList from spriteList
 
         SDL_RenderPresent(sys.get_renderer());
         SDL_FreeSurface(image);
@@ -81,27 +78,10 @@ void GameEngine::executeRemove() {
 }
 
 /*
- * If a meteorite leaves the screen, delete it
- */
-//void GameEngine::targetDeletion() {
-//    bool deleteFirstMeteorite = false;
-//    for (Target *meteorite : targetList) {
-//        if (meteorite->tick()) {
-//            toRemoveList.push_back(meteorite);
-//            deleteFirstMeteorite = true;
-//        }
-//    }
-//
-//    if (deleteFirstMeteorite) {
-//        targetList.erase(targetList.begin());
-//    }
-//}
-
-/*
- * Spawns meteorites if
- * there are no meteorites
+ * Spawns target if
+ * there are no targets
  * OR
- * if there is only one meteorite on screen and it has reached at least halfway down
+ * if there is only one target on screen and it has reached at least halfway down
  */
 void GameEngine::targetSpawning() {
     if (targetList.empty() || (targetList.size() < 2 && targetList[0]->get_rekt().y > 300)) {
@@ -115,31 +95,14 @@ void GameEngine::targetSpawning() {
  * Checks collisions
  */
 
-Sprite* GameEngine::collisionCheck(Sprite *sprite) {
+void GameEngine::collisionCheck(Sprite *sprite) {
     for (Sprite *other : spriteList) {
         if (sprite->collision(other)) {
             toRemoveList.push_back(sprite);
             toRemoveList.push_back(other);
-            if (dynamic_cast<Player*>(sprite) || dynamic_cast<Player*>(other)) { // Game over!
-                existShip = false;
-            }
         }
     }
 }
-
-/*
- * Checks if the bullet is outside the screen
- * and if so sets bulletOnScreen to false so that the player can shoot another shot
- * and adds the bullet to toRemoveList
- */
-//void GameEngine::bulletCheck(Sprite *sprite) {
-//    if (Bullet *b = dynamic_cast<Bullet *>(sprite)) {
-//        if (b->tick()) {
-//            bulletOnScreen = false;
-//            toRemoveList.push_back(b);
-//        }
-//    }
-//}
 
 
 GameEngine::~GameEngine() {

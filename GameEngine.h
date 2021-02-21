@@ -11,7 +11,6 @@
 
 class GameEngine {
 private:
-
     Player* player;
     std::vector<Sprite*> spriteList;
     std::vector<Sprite*> toRemoveList;
@@ -19,12 +18,8 @@ private:
     Uint32 nextTick;
     int tickInterval;
     int delay;
-    bool existShip = true;
-
-    void bulletCheck(Sprite *sprite);
-    Sprite* collisionCheck(Sprite *sprite);
+    void collisionCheck(Sprite *sprite);
     void targetSpawning();
-    void targetDeletion();
     void executeRemove();
 public:
     void addSprite(Sprite*);

@@ -55,6 +55,14 @@ struct GameParams {
 
     //The number of ticks between shots
     int bulletDelay;
+
+    void initializePositionParams() {
+        playerX = windowWidth / 2 - playerWidth / 2;
+        playerY = windowHeight - playerHeight;
+
+        bulletOffsetX = playerWidth / 2 - bulletWidth / 2;
+        bulletOffsetY = -playerHeight + bulletHeight / 2;
+    }
 };
 
 

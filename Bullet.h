@@ -12,7 +12,7 @@ protected:
 
 public:
     void tick();
-    static Bullet *getInstance(int x, int y, int w, int h);
+    static Bullet *getInstance(int x, int y);
 
 };
 
