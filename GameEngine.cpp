@@ -1,6 +1,7 @@
 #include "GameEngine.h"
-#include "System.h"
+
 GameEngine engine;
+
 
 void GameEngine::addSprite(Sprite *sprite) {
     spriteList.push_back(sprite);
@@ -38,12 +39,12 @@ void GameEngine::run(GameParams gp) {
             SDL_Delay(delay);
         }
 
-        SDL_RenderClear(sys.get_renderer());
+        SDL_RenderClear(get_renderer());
 
         //Background image
         SDL_Surface *image = SDL_LoadBMP(gameParams.backgroundSpritePath);
-        SDL_Texture *texture = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
-        SDL_RenderCopy(sys.get_renderer(), texture, NULL, NULL);
+        SDL_Texture *texture = SDL_CreateTextureFromSurface(get_renderer(), image);
+        SDL_RenderCopy(get_renderer(), texture, NULL, NULL);
         for (Sprite *sprite : spriteList) {
             removeCollidingSprites(sprite); //Marks colliding sprites for removal.
             sprite->tick();
@@ -53,7 +54,7 @@ void GameEngine::run(GameParams gp) {
         targetSpawning();           //Handles target spawning, see method comment comment
         executeRemove();            //Removes all sprites in toRemoveList from spriteList
 
-        SDL_RenderPresent(sys.get_renderer());
+        SDL_RenderPresent(get_renderer());
         SDL_FreeSurface(image);
         SDL_DestroyTexture(texture);
     }
@@ -99,5 +100,19 @@ void GameEngine::removeCollidingSprites(Sprite *sprite) {
 
 
 GameEngine::~GameEngine() {
+    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyTexture(texture);
+    SDL_Quit();
+}
 
+GameEngine::GameEngine() {
+    SDL_Init(SDL_INIT_EVERYTHING);
+    window = SDL_CreateWindow(" Space Shooter", SDL_WINDOWPOS_CENTERED,
+                              SDL_WINDOWPOS_CENTERED, gameParams.windowWidth, gameParams.windowHeight, 0);
+    renderer = SDL_CreateRenderer(window, -1, 0);
+}
+
+SDL_Renderer *GameEngine::get_renderer() const {
+    return renderer;
 }

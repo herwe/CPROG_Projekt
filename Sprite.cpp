@@ -1,5 +1,5 @@
 #include "Sprite.h"
-#include "System.h"
+#include "GameEngine.h"
 
 SDL_Rect &Sprite::get_rekt() {
     return rekt;
@@ -7,12 +7,12 @@ SDL_Rect &Sprite::get_rekt() {
 
 Sprite::Sprite(int x, int y, int w, int h, const char *path) : rekt{x, y, w, h} {
     SDL_Surface *image = SDL_LoadBMP(path);
-    sdlTexture = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
+    sdlTexture = SDL_CreateTextureFromSurface(engine.get_renderer(), image);
     SDL_FreeSurface(image);
 }
 
 void Sprite::draw() {
-    SDL_RenderCopy(sys.get_renderer(), sdlTexture, NULL, &get_rekt());
+    SDL_RenderCopy(engine.get_renderer(), sdlTexture, NULL, &get_rekt());
 }
 
 
