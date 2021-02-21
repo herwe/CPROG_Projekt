@@ -11,12 +11,13 @@ private:
     SDL_Rect rekt;
     Sprite(const Sprite &) = delete;
     const Sprite &operator=(const Sprite &) = delete;
+    SDL_Texture *sdlTexture;
 
 protected:
-    SDL_Texture *sdlTexture;
     Sprite(int x, int y, int w, int h, const char *path);
 
 public:
+    virtual void tick(){};
     virtual ~Sprite();
     SDL_Rect &get_rekt();
     virtual void draw();

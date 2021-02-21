@@ -27,6 +27,7 @@ int main(int argc, char *argv[]) {
     gameParams.bulletOffsetX = 38;
     gameParams.bulletOffsetY = -30;
     gameParams.bulletSpeed = 15;
+    gameParams.bulletDelay = 30;
 
     engine.run(gameParams);
     return 0;

@@ -6,15 +6,13 @@ Target::Target(int x, int y, int w, int h, const char* path = engine.gameParams.
 
 Target *Target::getInstance() {
     //srand (time(nullptr)); //Sets seed for rng
-    int x = rand() % engine.gameParams.windowWidth + engine.gameParams.targetWidth;
+    int x = rand() % engine.gameParams.windowWidth - engine.gameParams.targetWidth;
     return new Target(x, 0, engine.gameParams.targetWidth, engine.gameParams.targetHeight);
 }
 
-bool Target::tick() {
+void Target::tick() {
     this->get_rekt().y += engine.gameParams.targetSpeed;
-
     if (this->get_rekt().y >= engine.gameParams.windowHeight) {
-        return true;
+        engine.remove(this);
     }
-    return false;
 }

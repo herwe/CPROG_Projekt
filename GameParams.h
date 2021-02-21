@@ -21,6 +21,9 @@ struct GameParams {
     int windowWidth = 800;
     int windowHeight = 600;
 
+    //FPS limit
+    int fps = 60;
+
     //Starting position for the player sprite.
     int playerX;
     int playerY;
@@ -50,8 +53,8 @@ struct GameParams {
     int bulletOffsetX;
     int bulletOffsetY;
 
-    int fps = 60;
-
+    //The number of ticks between shots
+    int bulletDelay;
 };
 
 

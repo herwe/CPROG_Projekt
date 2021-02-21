@@ -10,10 +10,13 @@
 
 
 class Player : public Sprite {
+private:
+    int bulletDelay = 0;
 protected:
     Player(int x, int y, int w, int h, const char *path);
 
 public:
+    void tick();
     static Player *getInstance(int x, int y, int w, int h);
     void key_right();
     void key_left();

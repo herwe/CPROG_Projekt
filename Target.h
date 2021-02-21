@@ -8,7 +8,7 @@ protected:
     Target(int x, int y, int w, int h, const char *path);
 
 public:
-    bool tick();
+    void tick();
     static Target *getInstance();
 };
 

@@ -9,8 +9,8 @@ void GameEngine::addSprite(Sprite* sprite){
     spriteList.push_back(sprite);
 }
 
-void GameEngine::remove(Sprite*){
-
+void GameEngine::remove(Sprite* sprite){
+    toRemoveList.push_back(sprite);
 }
 
 void GameEngine::run(GameParams gp) {
@@ -46,15 +46,16 @@ void GameEngine::run(GameParams gp) {
         SDL_Texture *texture = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
         SDL_RenderCopy(sys.get_renderer(), texture, NULL, NULL);
         for (Sprite *sprite : spriteList) {
-            bulletCheck(sprite);    //Handles bullets, see method comment comment
+//            bulletCheck(sprite);    //Handles bullets, see method comment comment
             collisionCheck(sprite); //Handles sprite collision
+            sprite->tick();
             sprite->draw();         //Draws all sprites
         }
 
         targetSpawning();        //Handles meteorite spawning, see method comment comment
-        targetDeletion();        //If a meteorite leaves the screen, delete it
+//        targetDeletion();        //If a meteorite leaves the screen, delete it
 
-        old_remove();                   //Removes all sprites in toRemoveList from spriteList
+        executeRemove();                   //Removes all sprites in toRemoveList from spriteList
 
         SDL_RenderPresent(sys.get_renderer());
         SDL_FreeSurface(image);
@@ -67,14 +68,13 @@ void GameEngine::run(GameParams gp) {
 /*
  * Removes all sprites marked for removal from spriteList
  */
-void GameEngine::old_remove() {
-    for (Sprite *spriteL : toRemoveList) {
-        for (std::vector<Sprite *>::iterator i = spriteList.begin(); i != spriteList.end();) {
-            if (*i == spriteL) {
-                i = spriteList.erase(i);
-            } else {
-                i++;
-            }
+void GameEngine::executeRemove() {
+    for (Sprite *rem : toRemoveList) {
+        bool isTarget = dynamic_cast<Target*>(rem);
+        delete rem;
+        spriteList.erase(find(spriteList.begin(), spriteList.end(), rem));
+        if (isTarget){
+            targetList.erase(find(targetList.begin(), targetList.end(), rem));
         }
     }
     toRemoveList.clear();
@@ -83,19 +83,19 @@ void GameEngine::old_remove() {
 /*
  * If a meteorite leaves the screen, delete it
  */
-void GameEngine::targetDeletion() {
-    bool deleteFirstMeteorite = false;
-    for (Target *meteorite : targetList) {
-        if (meteorite->tick()) {
-            toRemoveList.push_back(meteorite);
-            deleteFirstMeteorite = true;
-        }
-    }
-
-    if (deleteFirstMeteorite) {
-        targetList.erase(targetList.begin());
-    }
-}
+//void GameEngine::targetDeletion() {
+//    bool deleteFirstMeteorite = false;
+//    for (Target *meteorite : targetList) {
+//        if (meteorite->tick()) {
+//            toRemoveList.push_back(meteorite);
+//            deleteFirstMeteorite = true;
+//        }
+//    }
+//
+//    if (deleteFirstMeteorite) {
+//        targetList.erase(targetList.begin());
+//    }
+//}
 
 /*
  * Spawns meteorites if
@@ -122,8 +122,6 @@ Sprite* GameEngine::collisionCheck(Sprite *sprite) {
             toRemoveList.push_back(other);
             if (dynamic_cast<Player*>(sprite) || dynamic_cast<Player*>(other)) { // Game over!
                 existShip = false;
-            } else {
-                bulletOnScreen = false;
             }
         }
     }
@@ -134,14 +132,14 @@ Sprite* GameEngine::collisionCheck(Sprite *sprite) {
  * and if so sets bulletOnScreen to false so that the player can shoot another shot
  * and adds the bullet to toRemoveList
  */
-void GameEngine::bulletCheck(Sprite *sprite) {
-    if (Bullet *b = dynamic_cast<Bullet *>(sprite)) {
-        if (b->tick()) {
-            bulletOnScreen = false;
-            toRemoveList.push_back(b);
-        }
-    }
-}
+//void GameEngine::bulletCheck(Sprite *sprite) {
+//    if (Bullet *b = dynamic_cast<Bullet *>(sprite)) {
+//        if (b->tick()) {
+//            bulletOnScreen = false;
+//            toRemoveList.push_back(b);
+//        }
+//    }
+//}
 
 
 GameEngine::~GameEngine() {

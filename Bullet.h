@@ -11,7 +11,7 @@ protected:
     Bullet(int x, int y, int w, int h, const char *path);
 
 public:
-    bool tick();
+    void tick();
     static Bullet *getInstance(int x, int y, int w, int h);
 
 };

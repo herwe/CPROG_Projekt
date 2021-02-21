@@ -16,7 +16,6 @@ private:
     std::vector<Sprite*> spriteList;
     std::vector<Sprite*> toRemoveList;
     std::vector<Target*> targetList;
-    bool bulletOnScreen = false;
     Uint32 nextTick;
     int tickInterval;
     int delay;
@@ -26,7 +25,7 @@ private:
     Sprite* collisionCheck(Sprite *sprite);
     void targetSpawning();
     void targetDeletion();
-    void old_remove();
+    void executeRemove();
 public:
     void addSprite(Sprite*);
     GameParams gameParams;
