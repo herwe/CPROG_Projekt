@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "Target.h"
 
+
 int main(int argc, char *argv[]) {
     GameParams gameParams;
 
@@ -26,7 +27,6 @@ int main(int argc, char *argv[]) {
     gameParams.bulletOffsetY = -30;
     gameParams.bulletSpeed = 15;
 
-    GameEngine gameEngine;
-    gameEngine.run(gameParams);
+    g_engine.run(gameParams);
     return 0;
 }

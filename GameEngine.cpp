@@ -5,6 +5,7 @@
 #include "GameEngine.h"
 #include "Player.h"
 
+GameEngine g_engine;
 
 void GameEngine::addSprite(Sprite* sprite){
     spriteList.push_back(sprite);
@@ -13,6 +14,8 @@ void GameEngine::addSprite(Sprite* sprite){
 
 void GameEngine::run(GameParams gp) {
     gameParams = gp;
+
+    tickInterval = 1000 / gameParams.fps;
 
     player = Player::getInstance(gameParams.playerX, gameParams.playerY, gameParams.playerWidth, gameParams.playerHeight);
     spriteList.push_back(player);
