@@ -72,9 +72,7 @@ void GameEngine::executeRemove() {
 }
 
 /*
- * Spawns target if there are no targets
- * OR
- * if there is only one target on screen and it has reached at least halfway down
+ * Spawns a target every targetFrequency:th tick.
  */
 void GameEngine::targetSpawning() {
     if (targetSpawningDelay == 0){
