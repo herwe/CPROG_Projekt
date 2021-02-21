@@ -1,14 +1,5 @@
-//
-// Created by fredr on 2021-02-20.
-//
-
 #ifndef CPROG_PROJEKT_GAMEPARAMS_H
 #define CPROG_PROJEKT_GAMEPARAMS_H
-
-
-#include <string>
-
-using namespace std;
 
 struct GameParams {
     //File paths for sprites.
@@ -56,6 +47,9 @@ struct GameParams {
     //The number of ticks between shots
     int bulletDelay;
 
+    /*
+     * Calculates position for the player and bullet offset.
+     */
     void initializePositionParams() {
         playerX = windowWidth / 2 - playerWidth / 2;
         playerY = windowHeight - playerHeight;

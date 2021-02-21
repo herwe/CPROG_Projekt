@@ -1,12 +1,10 @@
 
 #include <SDL2/SDL.h>
-#include <string>
 #include "Sprite.h"
 #include "Bullet.h"
-#include "Target.h"
 
-#ifndef CPROG_PROJEKT_SHIP_H
-#define CPROG_PROJEKT_SHIP_H
+#ifndef CPROG_PROJEKT_PLAYER_H
+#define CPROG_PROJEKT_PLAYER_H
 
 
 class Player : public Sprite {
@@ -18,11 +16,9 @@ protected:
 public:
     void tick();
     static Player *getInstance(int x, int y, int w, int h);
-    void key_right();
-    void key_left();
     Bullet* shoot();
     void key_pressed(SDL_Event e);
 };
 
 
-#endif //CPROG_PROJEKT_SHIP_H
+#endif //CPROG_PROJEKT_PLAYER_H

@@ -1,6 +1,5 @@
-#ifndef CPROG_PROJEKT_SpriteEngine_H
-#define CPROG_PROJEKT_SpriteEngine_H
-
+#ifndef CPROG_PROJEKT_GameEngine_H
+#define CPROG_PROJEKT_GameEngine_H
 
 #include <vector>
 #include <algorithm>
@@ -18,18 +17,18 @@ private:
     Uint32 nextTick;
     int tickInterval;
     int delay;
-    void collisionCheck(Sprite *sprite);
+    void removeCollidingSprites(Sprite *sprite);
     void targetSpawning();
     void executeRemove();
+
 public:
     void addSprite(Sprite*);
     GameParams gameParams;
     ~GameEngine();
     void run(GameParams);
-
     void remove(Sprite *);
 };
 
 extern GameEngine engine;
 
-#endif //CPROG_PROJEKT_SpriteEngine_H
+#endif //CPROG_PROJEKT_GameEngine_H

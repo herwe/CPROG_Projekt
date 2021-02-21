@@ -1,6 +1,4 @@
-
 #include <SDL2/SDL.h>
-#include "System.h"
 
 #ifndef CPROG_PROJEKT_SPRITE_H
 #define CPROG_PROJEKT_SPRITE_H

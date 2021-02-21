@@ -5,7 +5,7 @@ Target::Target(int x, int y, int w, int h, const char *path = engine.gameParams.
                                                                                                            path) {}
 
 Target *Target::getInstance() {
-    int x = rand() % engine.gameParams.windowWidth - engine.gameParams.targetWidth * 2;
+    int x = rand() % engine.gameParams.windowWidth - engine.gameParams.targetWidth;
     x += engine.gameParams.targetWidth;
     return new Target(x, 0, engine.gameParams.targetWidth, engine.gameParams.targetHeight);
 }

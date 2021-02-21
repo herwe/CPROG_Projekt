@@ -1,6 +1,6 @@
 #include "Sprite.h"
-#ifndef CPROG_PROJEKT_METEORITE_H
-#define CPROG_PROJEKT_METEORITE_H
+#ifndef CPROG_PROJEKT_TARGET_H
+#define CPROG_PROJEKT_TARGET_H
 
 
 class Target : public Sprite {
@@ -13,4 +13,4 @@ public:
 };
 
 
-#endif //CPROG_PROJEKT_METEORITE_H
+#endif //CPROG_PROJEKT_TARGET_H

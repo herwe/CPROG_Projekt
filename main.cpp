@@ -1,8 +1,4 @@
-#include "Sprite.h"
 #include "GameEngine.h"
-#include "Player.h"
-#include "Target.h"
-
 
 int main(int argc, char *argv[]) {
     GameParams gameParams;

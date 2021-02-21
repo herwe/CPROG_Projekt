@@ -1,4 +1,3 @@
-
 #include "Sprite.h"
 
 #ifndef CPROG_PROJEKT_BULLET_H
