@@ -15,6 +15,7 @@ int main(int argc, char *argv[]) {
     gameParams.targetWidth = 50;
     gameParams.targetHeight = 50;
     gameParams.targetSpeed = 3;
+    gameParams.targetFrequency = 30;
 
     gameParams.bulletWidth = 25;
     gameParams.bulletHeight = 50;

@@ -33,6 +33,9 @@ struct GameParams {
     //Number of pixels to drop per tick.
     int targetSpeed;
 
+    //The number of ticks between each target spawn.
+    int targetFrequency;
+
     //Bullet hitbox.
     int bulletWidth;
     int bulletHeight;

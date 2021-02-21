@@ -13,10 +13,10 @@ private:
     Player* player;
     std::vector<Sprite*> spriteList;
     std::vector<Sprite*> toRemoveList;
-    std::vector<Target*> targetList;
     Uint32 nextTick;
     int tickInterval;
     int delay;
+    int targetSpawningDelay = 0;
     void removeCollidingSprites(Sprite *sprite);
     void targetSpawning();
     void executeRemove();

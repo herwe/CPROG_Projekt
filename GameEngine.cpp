@@ -64,12 +64,8 @@ void GameEngine::run(GameParams gp) {
  */
 void GameEngine::executeRemove() {
     for (Sprite *rem : toRemoveList) {
-        bool isTarget = dynamic_cast<Target *>(rem);
         delete rem;
         spriteList.erase(find(spriteList.begin(), spriteList.end(), rem));
-        if (isTarget) {
-            targetList.erase(find(targetList.begin(), targetList.end(), rem));
-        }
     }
     toRemoveList.clear();
 }
@@ -80,10 +76,12 @@ void GameEngine::executeRemove() {
  * if there is only one target on screen and it has reached at least halfway down
  */
 void GameEngine::targetSpawning() {
-    if (targetList.empty() || (targetList.size() < 2 && targetList[0]->get_rekt().y > gameParams.windowHeight / 2)) {
+    if (targetSpawningDelay == 0){
         Target *temp = Target::getInstance();
-        targetList.push_back(temp);
         spriteList.push_back(temp);
+        targetSpawningDelay = gameParams.targetFrequency;
+    }else{
+        targetSpawningDelay--;
     }
 }
 
