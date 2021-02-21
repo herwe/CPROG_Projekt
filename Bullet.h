@@ -13,7 +13,6 @@ protected:
 public:
     bool tick();
     static Bullet *getInstance(int x, int y, int w, int h);
-    ~Bullet();
 
 };
 

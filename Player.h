@@ -19,7 +19,6 @@ public:
     void key_left();
     Bullet* shoot();
     void key_pressed(SDL_Event e);
-    ~Player();
 };
 
 

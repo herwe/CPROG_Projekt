@@ -1,15 +1,16 @@
-#define PATH "E:/fredr/Documents/CLionProjects/CPROG Projekt/CPROG_Projekt/pics/space.bmp"
-
 #include <iostream>
 #include "Bullet.h"
 #include "GameEngine.h"
 #include "Player.h"
 
-GameEngine g_engine;
+GameEngine engine;
 
 void GameEngine::addSprite(Sprite* sprite){
     spriteList.push_back(sprite);
-//BOOM
+}
+
+void GameEngine::remove(Sprite*){
+
 }
 
 void GameEngine::run(GameParams gp) {
@@ -41,7 +42,7 @@ void GameEngine::run(GameParams gp) {
         SDL_RenderClear(sys.get_renderer());
 
         //Background image
-        SDL_Surface *image = SDL_LoadBMP(PATH);
+        SDL_Surface *image = SDL_LoadBMP(gameParams.backgroundSpritePath);
         SDL_Texture *texture = SDL_CreateTextureFromSurface(sys.get_renderer(), image);
         SDL_RenderCopy(sys.get_renderer(), texture, NULL, NULL);
         for (Sprite *sprite : spriteList) {
@@ -53,7 +54,7 @@ void GameEngine::run(GameParams gp) {
         targetSpawning();        //Handles meteorite spawning, see method comment comment
         targetDeletion();        //If a meteorite leaves the screen, delete it
 
-        remove();                   //Removes all sprites in toRemoveList from spriteList
+        old_remove();                   //Removes all sprites in toRemoveList from spriteList
 
         SDL_RenderPresent(sys.get_renderer());
         SDL_FreeSurface(image);
@@ -66,7 +67,7 @@ void GameEngine::run(GameParams gp) {
 /*
  * Removes all sprites marked for removal from spriteList
  */
-void GameEngine::remove() {
+void GameEngine::old_remove() {
     for (Sprite *spriteL : toRemoveList) {
         for (std::vector<Sprite *>::iterator i = spriteList.begin(); i != spriteList.end();) {
             if (*i == spriteL) {

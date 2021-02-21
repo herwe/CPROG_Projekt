@@ -12,10 +12,10 @@ using namespace std;
 
 struct GameParams {
     //File paths for sprites.
-    string backgroundSpritePath;
-    string playerSpritePath;
-    string targetSpritePath;
-    string bulletSpritePath;
+    const char *backgroundSpritePath;
+    const char *playerSpritePath;
+    const char *targetSpritePath;
+    const char *bulletSpritePath;
 
     //Window dimensions
     int windowWidth = 800;
@@ -28,6 +28,9 @@ struct GameParams {
     //Player hitbox.
     int playerWidth;
     int playerHeight;
+
+    //Player speed in pixels per tick
+    int playerSpeed;
 
     //Target hitbox.
     int targetWidth;

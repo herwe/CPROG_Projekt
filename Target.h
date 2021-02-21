@@ -10,7 +10,6 @@ protected:
 public:
     bool tick();
     static Target *getInstance();
-    ~Target();
 };
 
 

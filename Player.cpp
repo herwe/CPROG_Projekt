@@ -1,23 +1,23 @@
-#define PATH "E:/fredr/Documents/CLionProjects/CPROG Projekt/CPROG_Projekt/pics/ship.bmp"
 
 #include "Player.h"
+#include "GameEngine.h"
 
-Player::Player(int x, int y, int w , int h, const char *path = PATH) : Sprite(x, y, w, h, path) {}
+Player::Player(int x, int y, int w, int h, const char *path = engine.gameParams.playerSpritePath) : Sprite(x, y, w, h, path) {}
 
-void Player::key_pressed(SDL_Event eve){
+void Player::key_pressed(SDL_Event eve) {
     switch (eve.key.keysym.sym) {
         case SDLK_LEFT:
-            if (this->get_rekt().x > 0){
-                this->get_rekt().x -= 5;
+            if (this->get_rekt().x > 0) {
+                this->get_rekt().x -= engine.gameParams.playerSpeed;
             }
             break;
         case SDLK_RIGHT:
-            if (this->get_rekt().x < 700){
-                this->get_rekt().x += 5;
+            if (this->get_rekt().x < engine.gameParams.windowWidth - engine.gameParams.playerWidth) {
+                this->get_rekt().x += engine.gameParams.playerSpeed;
             }
             break;
         case SDLK_SPACE:
-
+            engine.addSprite(shoot());
             break;
 
 //        case SDLK_SPACE:    //If the player presses space and there is no bullet on screen AND there exists a player, shoot and disable the ability to shoot
@@ -29,13 +29,13 @@ void Player::key_pressed(SDL_Event eve){
     }
 }
 
-Player* Player::getInstance(int x, int y, int w, int h) {
+Player *Player::getInstance(int x, int y, int w, int h) {
     return new Player(x, y, w, h);
 }
 
 
-Bullet* Player::shoot() {
-    Bullet* b = Bullet::getInstance(this->get_rekt().x + 38, this->get_rekt().y - 30, 25,50);
+Bullet *Player::shoot() {
+    Bullet *b = Bullet::getInstance(this->get_rekt().x + engine.gameParams.bulletOffsetX, this->get_rekt().y + engine.gameParams.bulletOffsetY, 25, 50);
     return b;
 }
 

@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
     gameParams.playerY = 550;
     gameParams.playerWidth = 100;
     gameParams.playerHeight = 50;
+    gameParams.playerSpeed = 5;
 
     gameParams.targetWidth = 50;
     gameParams.targetHeight = 50;
@@ -27,6 +28,6 @@ int main(int argc, char *argv[]) {
     gameParams.bulletOffsetY = -30;
     gameParams.bulletSpeed = 15;
 
-    g_engine.run(gameParams);
+    engine.run(gameParams);
     return 0;
 }

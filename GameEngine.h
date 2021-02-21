@@ -26,16 +26,16 @@ private:
     Sprite* collisionCheck(Sprite *sprite);
     void targetSpawning();
     void targetDeletion();
-    void remove();
-    void addSprite(Sprite*);
-
+    void old_remove();
 public:
+    void addSprite(Sprite*);
     GameParams gameParams;
     ~GameEngine();
     void run(GameParams);
 
+    void remove(Sprite *);
 };
 
-extern GameEngine g_engine;
+extern GameEngine engine;
 
 #endif //CPROG_PROJEKT_SpriteEngine_H
